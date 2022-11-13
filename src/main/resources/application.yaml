@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: hr-api-gateway-zuul
+  cloud:
+    gateway:
+      routes:
+        - id: hr-worker
+          uri: lb://hr-worker
+          predicates:
+            - Path=/workers-api/**
+          filters:
+            - RewritePath=/workers-api(?<segment>/?.*), $\{segment}
+
+        - id: hr-payroll
+          uri: lb://hr-payroll
+          predicates:
+            - Path=/payroll-api/**
+          filters:
+            - RewritePath=/payroll-api(?<segment>/?.*), $\{segment}
+#        - id: hr-user
+#          uri: lb://hr-user
+#          predicates:
+#            - Path=/users/**
+#        - id: hr-oauth
+#          uri: lb://hr-oauth
+#          predicates:
+#            - Path=/oauth/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
