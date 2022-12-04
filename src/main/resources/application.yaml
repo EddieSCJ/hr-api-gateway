@@ -23,10 +23,12 @@ spring:
             - Path=/payroll-api/**
           filters:
             - RewritePath=/payroll-api(?<segment>/?.*), $\{segment}
-#        - id: hr-user
-#          uri: lb://hr-user
-#          predicates:
-#            - Path=/users/**
+        - id: hr-user
+          uri: lb://hr-user
+          predicates:
+            - Path=/users-api/**
+          filters:
+            - RewritePath=/users-api(?<segment>/?.*), $\{segment}
 #        - id: hr-oauth
 #          uri: lb://hr-oauth
 #          predicates:
