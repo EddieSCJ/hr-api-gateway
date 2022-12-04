@@ -29,6 +29,12 @@ spring:
             - Path=/users-api/**
           filters:
             - RewritePath=/users-api(?<segment>/?.*), $\{segment}
+        - id: hr-oauth
+          uri: lb://hr-oauth
+          predicates:
+            - Path=/oauth-api/**
+          filters:
+            - RewritePath=/oauth-api(?<segment>/?.*), $\{segment}
 #        - id: hr-oauth
 #          uri: lb://hr-oauth
 #          predicates:
