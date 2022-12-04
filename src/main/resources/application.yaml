@@ -1,7 +1,5 @@
 server:
   port: 8080
-
-
 spring:
   main:
     web-application-type: reactive
@@ -16,7 +14,6 @@ spring:
             - Path=/workers-api/**
           filters:
             - RewritePath=/workers-api(?<segment>/?.*), $\{segment}
-
         - id: hr-payroll
           uri: lb://hr-payroll
           predicates:
@@ -35,10 +32,6 @@ spring:
             - Path=/oauth-api/**
           filters:
             - RewritePath=/oauth-api(?<segment>/?.*), $\{segment}
-#        - id: hr-oauth
-#          uri: lb://hr-oauth
-#          predicates:
-#            - Path=/oauth/**
 
 eureka:
   client:
